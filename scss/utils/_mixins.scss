@@ -1,0 +1,64 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// MEDIA QUERIES MANAGER
+
+/*
+0-600px: Phone
+600-900px: tablet portrait
+900-1200px: tablet landscape
+[1200-1800px] our normal styles
+1800px +: big desktops
+*/
+
+/*breakpoint arg choices: 
+-phone
+-tab portrait
+-tab landscape
+-big desk
+
+1em = 16px
+*/
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    //600px
+    @media only screen and (max-width: 37.5em) {
+      // passing the fz from base.scss
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-portrait {
+    //900px
+
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == tablet-landscape {
+    //1200px
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == big-desktop {
+    //1800px
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}
